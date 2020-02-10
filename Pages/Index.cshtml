@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var transientOperation = (IOperationTransient)ViewData["Transient"];
+    var scopedOperation = (IOperationScoped)ViewData["Scoped"];
+    var singletonOperation = (IOperationScoped)ViewData["Singleton"];
+    var singletonInstanceOperation = (IOperationScoped)ViewData["SingletonInstance"];
+    var service = (Services.OperationService)ViewData["Service"];
+}
+
+<div>
+    <h2>Lifetimes</h2>
+
+    <span>Controller Operations</span>
+
+    <ul>
+        <li><strong>Transient:</strong> @transientOperation.GetCurrentID()</li>
+        <li><strong>Scoped:</strong> @scopedOperation.GetCurrentID()</li>
+        <li><strong>Singleton:</strong> @singletonOperation.GetCurrentID()</li>
+        <li><strong>Singleton Instance:</strong> @singletonInstanceOperation.GetCurrentID()</li>
+    </ul>
+
+    <span>OperationService Operations</span>
+
+    <ul>
+        <li><strong>Transient:</strong> @service.TransientOperation.GetCurrentID()</li>
+        <li><strong>Scoped:</strong> @service.ScopedOperation.GetCurrentID()</li>
+        <li><strong>Singleton:</strong> @service.SingletonOperation.GetCurrentID()</li>
+        <li><strong>Singleton Instance:</strong> @service.SingletonInstanceOperation.GetCurrentID()</li>
+    </ul>
+</div>
